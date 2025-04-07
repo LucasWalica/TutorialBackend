@@ -20,8 +20,6 @@ public class GameSpecification implements Specification<Game> {
         this.criteria = criteria;
     }
 
-
-
     @Override
     public Predicate toPredicate(Root<Game> root, CriteriaQuery<?> query, CriteriaBuilder builder) {
         if (criteria.getOperation().equalsIgnoreCase(":") && criteria.getValue() != null) {
