@@ -1,6 +1,7 @@
 package com.ccsw.tutorial.Game.service;
 
 
+import com.ccsw.tutorial.Author.model.Author;
 import com.ccsw.tutorial.Author.service.AuthorService;
 import com.ccsw.tutorial.Game.model.GameDto;
 import com.ccsw.tutorial.Game.repository.GameRepository;
@@ -33,6 +34,12 @@ public class GameServiceImpl implements GameService {
 
     @Autowired
     CategoryService categoryService;
+
+
+    @Override
+    public Game getByDto(GameDto dto) {
+        return this.gameRepository.findById(dto.getId()).orElse(null);
+    }
 
     /**
      * {@inheritDoc}

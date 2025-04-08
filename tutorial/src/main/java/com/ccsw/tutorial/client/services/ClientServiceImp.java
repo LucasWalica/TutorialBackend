@@ -4,16 +4,25 @@ import ch.qos.logback.core.encoder.EchoEncoder;
 import com.ccsw.tutorial.client.model.Client;
 import com.ccsw.tutorial.client.model.ClientDto;
 import com.ccsw.tutorial.client.repository.ClientRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+@Service
+@Transactional
 public class ClientServiceImp implements ClientService{
 
     @Autowired
     ClientRepository clientRepository;
 
+
+    @Override
+    public Client getByDto(ClientDto dto) {
+        return this.clientRepository.findById(dto.getId()).orElse(null);
+    }
 
     @Override
     public Client get(Long id){

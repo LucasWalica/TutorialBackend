@@ -7,26 +7,35 @@ import com.ccsw.tutorial.Game.model.GameDto;
 import java.util.Date;
 
 
-public class LoadDto {
+public class LoanDto {
 
     private Long id;
-    private Long gameId;
-    private Long clientId;
+    private GameDto game;
+    private ClientDto client;
     private Date startDate;
     private Date endDate;
 
+    public ClientDto getClient() {
+        return client;
+    }
+
+    public void setGame(GameDto game) {
+        this.game = game;
+    }
+
+    public void setClient(ClientDto client) {
+        this.client = client;
+    }
+
+    public GameDto getGame() {
+        return game;
+    }
 
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setGameId(Long gameId) {
-        this.gameId = gameId;
-    }
 
-    public void setClientId(Long clientId) {
-        this.clientId = clientId;
-    }
 
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
@@ -40,17 +49,12 @@ public class LoadDto {
         return id;
     }
 
-    public Long getGameId() {
-        return gameId;
-    }
+
 
     public Date getStartDate() {
         return startDate;
     }
 
-    public Long getClientId() {
-        return clientId;
-    }
 
     public Date getEndDate() {
         return endDate;

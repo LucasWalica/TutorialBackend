@@ -19,11 +19,11 @@ public class Loan {
 
     @ManyToOne
     @JoinColumn(name="game_id", nullable = false)
-    private Long gameId;
+    private Game gameId;
 
     @ManyToOne
     @JoinColumn(name="client_id", nullable = false)
-    private Long clientId;
+    private Client clientId;
 
     @Column(name="start_date", nullable = false)
     private Date startDate;
@@ -36,7 +36,7 @@ public class Loan {
         this.id = id;
     }
 
-    public void setGameId(Long gameId) {
+    public void setGame(Game gameId) {
         this.gameId = gameId;
     }
 
@@ -44,7 +44,7 @@ public class Loan {
         this.startDate = startDate;
     }
 
-    public void setClientId(Long clientId) {
+    public void setClient(Client clientId) {
         this.clientId = clientId;
     }
 
@@ -52,7 +52,7 @@ public class Loan {
         this.endData = endData;
     }
 
-    public Long getGameId() {
+    public Game getGame() {
         return gameId;
     }
 
@@ -60,7 +60,7 @@ public class Loan {
         return id;
     }
 
-    public Long getClientId() {
+    public Client getClient() {
         return clientId;
     }
 

@@ -8,6 +8,8 @@ import java.util.List;
 public interface ClientService {
 
 
+    Client getByDto(ClientDto dto);
+
     Client get(Long id);
 
     Iterable<Client> findAll();
