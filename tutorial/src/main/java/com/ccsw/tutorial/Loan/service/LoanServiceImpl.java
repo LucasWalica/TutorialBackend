@@ -47,7 +47,7 @@ public class LoanServiceImpl implements LoanService {
     }
 
     @Override
-    public void save(Long id, LoanDto dto) {
+    public Loan save(Long id, LoanDto dto) {
 
         Loan loan;
 
@@ -60,7 +60,14 @@ public class LoanServiceImpl implements LoanService {
         BeanUtils.copyProperties(dto, loan, "id", "game_id", "client_id", "start_date", "end_date");
         loan.setGame(gameService.getByDto(dto.getGame()));
         loan.setClient(clientService.getByDto(dto.getClient()));
-
+        loan.setStartDate(dto.getStartDate());
+        loan.setEndData(dto.getEndDate());
         this.loanRepository.save(loan);
+        return loan;
+    }
+
+    @Override
+    public void delete(Long id) {
+        this.loanRepository.delete(loanRepository.findById(id).orElse(null));
     }
 }

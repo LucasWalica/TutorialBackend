@@ -7,6 +7,7 @@ import com.ccsw.tutorial.Game.model.GameDto;
 import com.ccsw.tutorial.Game.repository.GameRepository;
 import com.ccsw.tutorial.Game.model.Game;
 import com.ccsw.tutorial.Game.specification.GameSpecification;
+import com.ccsw.tutorial.category.model.Category;
 import com.ccsw.tutorial.category.services.CategoryService;
 import com.ccsw.tutorial.common.criteria.SearchCriteria;
 import jakarta.transaction.Transactional;
@@ -71,9 +72,13 @@ public class GameServiceImpl implements GameService {
 
         BeanUtils.copyProperties(dto, game, "id", "author", "category");
 
-        game.setAuthor(authorService.get(dto.getAuthor().getId()));
-        game.setCategory(categoryService.get(dto.getCategory().getId()));
 
+        if(authorService.get(dto.getAuthor().getId()).getClass() == Author.class){
+            game.setAuthor(authorService.get(dto.getAuthor().getId()));
+        }else {return;}
+        if(categoryService.get(dto.getCategory().getId()).getClass() == Category.class){
+            game.setCategory(categoryService.get(dto.getCategory().getId()));
+        }else {return;}
         this.gameRepository.save(game);
     }
 

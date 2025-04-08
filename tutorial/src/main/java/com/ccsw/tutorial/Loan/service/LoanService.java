@@ -10,6 +10,7 @@ public interface LoanService {
 
     List<Loan> find(Long client_id, Long game_id, Date start_date, Date end_date);
 
-    void save(Long id, LoanDto dto);
+    Loan save(Long id, LoanDto dto);
 
+    void delete(Long id);
 }

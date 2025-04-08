@@ -12,7 +12,7 @@ public interface ClientService {
 
     Client get(Long id);
 
-    Iterable<Client> findAll();
+    List<Client> findAll();
 
     void save(Long id, ClientDto dto);
 

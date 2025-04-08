@@ -11,6 +11,6 @@ import java.util.List;
 public interface LoanRepository extends CrudRepository<Loan, Long>, JpaSpecificationExecutor<Loan> {
 
     @Override
-    @EntityGraph(attributePaths = {"client_id", "game_id", "start_date", "end_date"})
+    @EntityGraph(attributePaths = {"client", "game", "startDate", "endDate"})
     List<Loan> findAll(Specification<Loan> spec);
 }

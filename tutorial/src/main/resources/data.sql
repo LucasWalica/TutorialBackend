@@ -3,6 +3,7 @@ CREATE TABLE IF NOT EXISTS category (
     name VARCHAR(255) NOT NULL
 );
 
+
 INSERT INTO category(name) VALUES ('Eurogames');
 INSERT INTO category(name) VALUES ('Ameritrash');
 INSERT INTO category(name) VALUES ('Familiar');
@@ -38,4 +39,27 @@ INSERT INTO game(title, age, category_id, author_id) VALUES ('Barrage', '14', 1,
 INSERT INTO game(title, age, category_id, author_id) VALUES ('Los viajes de Marco Polo', '12', 1, 3);
 INSERT INTO game(title, age, category_id, author_id) VALUES ('Azul', '8', 3, 5);
 
+CREATE TABLE IF NOT EXISTS clients(
+    id int AUTO_INCREMENT primary key,
+    name varchar(255) not null
+);
 
+
+insert into clients(name) values ('Federico');
+insert into clients(name) values ('María');
+insert into clients(name) values ('Ignacio');
+insert into clients(name) values ('Lucas');
+insert into clients(name) values ('Lilia');
+insert into clients(name) values ('Angela');
+
+
+CREATE TABLE IF NOT EXISTS loan(
+    id int primary key AUTO_INCREMENT,
+    game_id int not null,
+    client_id int not null,
+    start_date Date not null,
+    end_date Date not null,
+    FOREIGN KEY (client_id) REFERENCES clients(id),
+    FOREIGN KEY (game_id) REFERENCES game(id)
+
+);

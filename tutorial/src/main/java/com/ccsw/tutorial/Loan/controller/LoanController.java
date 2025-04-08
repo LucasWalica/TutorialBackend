@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -55,8 +56,14 @@ public class LoanController {
      */
     @Operation(summary = "Save or Update", description = "Method that saves or update data from Loan")
     @RequestMapping(path = {"", "/{id}"}, method = RequestMethod.PUT)
-    public void save(@PathVariable(name="id", required = false)Long id, @RequestBody LoanDto dto){
-        loanService.save(id, dto);
+    public ResponseEntity<Loan> save(@PathVariable(name="id", required = false)Long id, @RequestBody LoanDto dto){
+        Loan savedLoan = loanService.save(id, dto);
+        return ResponseEntity.ok(savedLoan);
     }
 
+    @Operation(summary = "Delete", description = "Method that deletes a Loan")
+    @RequestMapping(path={"/{id}"}, method=RequestMethod.DELETE)
+    public void delete(@PathVariable(name="id", required = true) Long id){
+        this.loanService.delete(id);
+    }
 }
