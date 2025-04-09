@@ -3,6 +3,7 @@ package com.ccsw.tutorial.Loan.service;
 import com.ccsw.tutorial.Game.service.GameService;
 import com.ccsw.tutorial.Loan.model.Loan;
 import com.ccsw.tutorial.Loan.model.LoanDto;
+import com.ccsw.tutorial.Loan.model.LoanSearchDto;
 import com.ccsw.tutorial.Loan.repository.LoanRepository;
 import com.ccsw.tutorial.Loan.specification.LoanSpecification;
 import com.ccsw.tutorial.client.services.ClientService;
@@ -10,6 +11,7 @@ import com.ccsw.tutorial.common.criteria.SearchCriteria;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -69,5 +71,10 @@ public class LoanServiceImpl implements LoanService {
     @Override
     public void delete(Long id) {
         this.loanRepository.delete(loanRepository.findById(id).orElse(null));
+    }
+
+    @Override
+    public Page<Loan> findPage(LoanSearchDto dto) {
+        return this.loanRepository.findAll(dto.getPageable().getPageable());
     }
 }

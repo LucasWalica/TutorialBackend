@@ -1,6 +1,8 @@
 package com.ccsw.tutorial.Loan.repository;
 
 import com.ccsw.tutorial.Loan.model.Loan;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
@@ -13,4 +15,6 @@ public interface LoanRepository extends CrudRepository<Loan, Long>, JpaSpecifica
     @Override
     @EntityGraph(attributePaths = {"client", "game", "startDate", "endDate"})
     List<Loan> findAll(Specification<Loan> spec);
+
+    Page<Loan> findAll(Pageable pageable);
 }

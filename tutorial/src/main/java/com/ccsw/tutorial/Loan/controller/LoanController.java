@@ -1,9 +1,13 @@
 package com.ccsw.tutorial.Loan.controller;
 
 
-import com.ccsw.tutorial.Game.model.Game;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+
 import com.ccsw.tutorial.Loan.model.Loan;
 import com.ccsw.tutorial.Loan.model.LoanDto;
+import com.ccsw.tutorial.Loan.model.LoanSearchDto;
 import com.ccsw.tutorial.Loan.service.LoanService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -66,4 +70,18 @@ public class LoanController {
     public void delete(@PathVariable(name="id", required = true) Long id){
         this.loanService.delete(id);
     }
+
+
+    @Operation(summary = "Find Page", description = "Method that returns a page")
+    @RequestMapping(path = "", method = RequestMethod.POST)
+    public Page<LoanDto> findPage(@RequestBody LoanSearchDto dto){
+
+        Page<Loan> page = this.loanService.findPage(dto);
+
+        return new PageImpl<>(page.getContent()
+                .stream()
+                .map(e -> mapper.map(e, LoanDto.class))
+                .collect(Collectors.toList()), page.getPageable(), page.getTotalElements());
+    }
+
 }
